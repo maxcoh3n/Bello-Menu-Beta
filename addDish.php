@@ -18,7 +18,7 @@ include 'common/bellodentrostarter.php'; ?>
 		<addadishtd colspan='30'></td></tr>
 		<tr>
 		</tr>
-		";	
+	";	
 
 	echo 
 	"<tr>
@@ -92,22 +92,54 @@ include 'common/bellodentrostarter.php'; ?>
 	<td>Spicy</td>
 	<td><input type='checkbox' name='Raw' id='Raw'></td>
 	</tr>
+	";
 
-	<tr>
-	<td>Active (on the Current Menu)</td>
-	<td><input type='checkbox' name='Active' id='Active' checked></td>
-	</tr> 
+	$query= "SELECT * FROM Menus ORDER BY MenuID" ;
+    //print $query;
+    $result= mysqli_query($cxn,$query);
+    if ($cxn->connect_error) {
+      die("Connection failed: " . $cxn->connect_error);
+    }
+    
+    $MenuArray = array();
+
+      while($row = mysqli_fetch_assoc($result))
+      {
+        array_push($MenuArray,array(
+            'MenuName' => $row['MenuName'],
+            'MenuID' => $row['MenuID']
+        ));
+	  }
+
+	if(count($MenuArray)>0){
+		echo "<tr>
+			<th> Menu </th> 
+			<th> Active on This Menu</th>
+			</tr>
+		";
+	}
+	  
+	 for($ct = 0; $ct < count($MenuArray); $ct++){
+		echo 
+			"<tr> 
+			<td> ".$MenuArray[$ct]['MenuName'] ."</td>
+			<td> <input type = 'checkbox' name = ActiveArray[$ct]> </td>
+			<input type = 'hidden' name =MenuIDArray[$ct] value = ".$MenuArray[$ct]['MenuID']." >
+			</tr>
+		";	
+	 } 
+
+	?>
 
 	<tr>
 	<td><input type='submit' value=' Submit ' name='submit'/></td>
 	</tr>
-	";
+	
 
-echo "</table>";
-echo "</form>";
+	</table>
+</form>
 
 
-?>
 
 </body>
 </html>
