@@ -28,7 +28,7 @@ $Spicy = (isset($_POST["Spicy"]))? 1: 0;
 //Programatically build end of SQL statement based off MenuIDActive columns
 
 $MenuIDArray = $_POST['MenuIDArray'];
-$ActiveArray = $_POST['ActiveArray'];
+$ActiveArray = isset($_POST['ActiveArray'])? $_POST['ActiveArray'] : array();
 
 $MenuActiveStatements = "";
 for($ct = 0; $ct < count($MenuIDArray); $ct++){

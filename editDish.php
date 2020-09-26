@@ -42,7 +42,7 @@ $ShipArray = array();
 
 $row = mysqli_fetch_assoc($result);
 
-$CourseArray = getCourses("Primary");
+$CourseArray = getCourses("");
 
 $ActiveArray = array();
 for($ct = 0; $ct < count($MenuArray); $ct++){
@@ -77,13 +77,13 @@ for($ct = 0; $ct < count($MenuArray); $ct++){
 <?php
 echo "
 <tr>
-<td width=100>Dish Name</td>
+<td width=100>Course Category</td>
 <td><select name='CourseCategory' >";
 foreach($CourseArray as $Course){
-    if($DishArray['CourseCategory'] == $Course){
-        echo "<option selected value=$Course> $Course</option>";
+    if($DishArray['CourseCategory'] == $Course['CourseName']){
+        echo "<option selected value=".$Course['CourseName']."> ".$Course['CourseName']."</option>";
     }else{
-        echo "<option value=$Course> $Course</option>";
+        echo "<option value=".$Course['CourseName']."> ".$Course['CourseName']."</option>";
     }
 }
 
