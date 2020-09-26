@@ -7,7 +7,6 @@
   <?php 
   include 'common/auth.php';
   include 'common/bellodentrostarter.php'; 
- 
   ?>
 
   <h2> Menu Printer Page 1</h2>
@@ -17,7 +16,7 @@
 
 
     <?php 
-    $query= "SELECT * FROM Menus ORDER BY MenuID" ;
+    $query= "SELECT `MenuName`, `MenuID` FROM Menus ORDER BY MenuID" ;
     //print $query;
     $result= mysqli_query($cxn,$query);
     if ($cxn->connect_error) {
