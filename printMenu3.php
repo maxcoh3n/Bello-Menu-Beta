@@ -13,9 +13,11 @@
   include 'common/restrictionBuilder.php';
   include 'common/courses.php';
 
-
+$MenuID = $_POST['MenuID'];
 $DishIDArray = $_POST['DishID'];
 $ActiveArray = $_POST['Active'];
+$MenuActive = "Menu" . $MenuID . "Active";
+
 
 
 // FIRST, Update the database and set dishes to be active or incative
@@ -23,7 +25,7 @@ $ActiveArray = $_POST['Active'];
     $DishID = $DishIDArray[$ct];
     $Active = array_key_exists($ct,$ActiveArray);
 
-    $query= "UPDATE Dishes SET Active = '$Active' WHERE DishID = $DishID" ;
+    $query= "UPDATE Dishes SET `$MenuActive` = '$Active' WHERE DishID = $DishID" ;
     // print $query;
     $result= mysqli_query($cxn,$query);
     if ($cxn->connect_error) {
@@ -35,8 +37,8 @@ $ActiveArray = $_POST['Active'];
 
 
 $DishArray = array();
-foreach(getCourses("Primary") as $Course){
-  $DishArray[$Course] = array();
+foreach(getCourses($MenuID) as $row){
+  $DishArray[$row['CourseName']] = array();
 }
 
 
@@ -46,7 +48,7 @@ foreach(getCourses("Primary") as $Course){
 
 
 
-  $query= "SELECT * FROM Dishes WHERE Active = 1 ORDER BY CourseCategory, Price" ;
+  $query= "SELECT * FROM Dishes WHERE $MenuActive = 1 ORDER BY CourseCategory, Price" ;
   //print $query;
   $result= mysqli_query($cxn,$query);
   if ($cxn->connect_error) {
@@ -67,7 +69,7 @@ foreach(getCourses("Primary") as $Course){
       'Price'            =>$row['Price'] ,
       'GlutenFree'      =>$row['GlutenFree'] ,
       'Vegan'           =>$row['Vegan'],
-      'Active'          =>$row['Active'],
+      'Active'          =>$row[$MenuActive],
       'Raw'           =>$row['Raw'],
       'Spicy'          =>$row['Spicy']
     ));
@@ -76,13 +78,15 @@ foreach(getCourses("Primary") as $Course){
   // print_r($DishArray);
 
   $ArrayCount = 0;
-  $CourseArray = getCourses("Primary");
+  $CourseArray = getCourses($MenuID);
 
   echo "<div class=center>";
     for($ct=0;$ct<count($CourseArray);$ct++) //goes through entire courseArray
     {
-      $Course = $CourseArray[$ct];
-      echo "<span class = course> $Course</span><br>";
+      $Course = $CourseArray[$ct]['CourseName'];
+      $CourseExtendedName = $CourseArray[$ct]['ExtendedName'];
+
+      echo "<span class = course> $CourseExtendedName</span><br>";
       for($ct2 = 0; $ct2 < count($DishArray[$Course]);$ct2++){
 
                 $DishID           = $DishArray[$Course][$ct2]['DishID'];

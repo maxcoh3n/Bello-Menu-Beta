@@ -22,23 +22,21 @@
 
   <?php
 
+  $MenuID = $_POST['MenuID'];
+  $MenuActive = "Menu" . $MenuID . "Active";
+
+  
+  $DishArray = array();
+  foreach(getCourses($MenuID) as $row){
+    $DishArray[$row['CourseName']] = array();
+  }
+
   $query= "SELECT * FROM Dishes ORDER BY CourseCategory, Price" ;
   //print $query;
   $result= mysqli_query($cxn,$query);
   if ($cxn->connect_error) {
     die("Connection failed: " . $cxn->connect_error);
 }
-
-  $DishArray = array();
-  foreach(getCourses("Primary") as $Course){
-    $DishArray[$Course] = array();
-  }
-  
-
-// print_r($DishArray);
-  // ));
-
-
 
   while($row = mysqli_fetch_assoc($result))
   {
@@ -54,7 +52,7 @@
       'Price'            =>$row['Price'] ,
       'GlutenFree'      =>$row['GlutenFree'] ,
       'Vegan'           =>$row['Vegan'],
-      'Active'          =>$row['Active'],
+      'Active'          =>$row[$MenuActive],
       'Raw'          =>$row['Raw'],
       'Spicy'          =>$row['Spicy']
     ));
@@ -69,7 +67,7 @@
           <th> Ingredients </th>
           <th> Price </th>
           <th> Dietary Restrictions </th>
-          <th> Active </th>
+          <th> Active on Current Menu</th>
           <th> Edit Item </th>
           <th> Delete Item </th>
           ";
@@ -81,12 +79,14 @@
 
   ?> <form method="post" action="printMenu3.php" target="_blank"> <?php
 
+  echo "<input type='hidden' name='MenuID'  value=$MenuID>";
+
   $ArrayCount = 0;
-  $CourseArray = getCourses("Primary");
+  $CourseArray = getCourses($MenuID);
 
     for($ct=0;$ct<count($CourseArray);$ct++) //goes through entire courseArray
     {
-      $Course = $CourseArray[$ct];
+      $Course = $CourseArray[$ct]['CourseName'];
       for($ct2 = 0; $ct2 < count($DishArray[$Course]);$ct2++){
 
                 $DishID           = $DishArray[$Course][$ct2]['DishID'];
