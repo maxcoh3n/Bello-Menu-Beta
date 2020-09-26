@@ -34,7 +34,7 @@
         ));
       }
 
-    echo "Menu: <select name = 'monthyear' required='required' >  ";
+    echo "Menu: <select name = 'MenuID' required='required' >  ";
     for($ct = 0; $ct < count($MenuArray); $ct++){
         $MenuName = $MenuArray[$ct]['MenuName'];
         $MenuID = $MenuArray[$ct]['MenuID'];
