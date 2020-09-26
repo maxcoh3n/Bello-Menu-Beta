@@ -22,7 +22,10 @@
 
   <?php
 
-  $MenuID = $_POST['MenuID'];
+  $result = $_POST["MenuID|MenuName"];
+  $result_explode = explode('|', $result);
+  $MenuID = $result_explode[0];
+  $MenuName = $result_explode[1];
   $MenuActive = "Menu" . $MenuID . "Active";
 
   
@@ -58,7 +61,7 @@
     ));
   }
 
-
+  echo "<h3> $MenuName Menu </h3>";
 
   echo "<table cellspacing='9'>\n";
       echo "<tr><td colspan='30'><hr/></td></tr>
@@ -89,64 +92,64 @@
       $Course = $CourseArray[$ct]['CourseName'];
       for($ct2 = 0; $ct2 < count($DishArray[$Course]);$ct2++){
 
-                $DishID           = $DishArray[$Course][$ct2]['DishID'];
-                $DishName         = $DishArray[$Course][$ct2]['DishName'];
-                $Ingredient1      = $DishArray[$Course][$ct2]['Ingredient1'];
-                $Ingredient2      = $DishArray[$Course][$ct2]['Ingredient2'];
-                $Ingredient3      = $DishArray[$Course][$ct2]['Ingredient3'];
-                $Ingredient4      = $DishArray[$Course][$ct2]['Ingredient4'];
-                $Ingredient5      = $DishArray[$Course][$ct2]['Ingredient5'];
-                $Ingredient6      = $DishArray[$Course][$ct2]['Ingredient6'];
+        $DishID           = $DishArray[$Course][$ct2]['DishID'];
+        $DishName         = $DishArray[$Course][$ct2]['DishName'];
+        $Ingredient1      = $DishArray[$Course][$ct2]['Ingredient1'];
+        $Ingredient2      = $DishArray[$Course][$ct2]['Ingredient2'];
+        $Ingredient3      = $DishArray[$Course][$ct2]['Ingredient3'];
+        $Ingredient4      = $DishArray[$Course][$ct2]['Ingredient4'];
+        $Ingredient5      = $DishArray[$Course][$ct2]['Ingredient5'];
+        $Ingredient6      = $DishArray[$Course][$ct2]['Ingredient6'];
 
-                $Ingredients = $Ingredient1;
-                if($Ingredient2 != 0){
-                  $Ingredients .= " / " . $Ingredient2;
-                }
-                if($Ingredient3 != 0){
-                  $Ingredients .= " / " . $Ingredient3;
-                }
-                if($Ingredient4 != 0){
-                  $Ingredients .= " / " . $Ingredient4;
-                }
-                if($Ingredient5 != 0){
-                  $Ingredients .= " / " . $Ingredient5;
-                }
-                if($Ingredient6 != 0){
-                  $Ingredients .= " / " . $Ingredient6;
-                }
+        $Ingredients = $Ingredient1;
+        if($Ingredient2 != 0){
+          $Ingredients .= " / " . $Ingredient2;
+        }
+        if($Ingredient3 != 0){
+          $Ingredients .= " / " . $Ingredient3;
+        }
+        if($Ingredient4 != 0){
+          $Ingredients .= " / " . $Ingredient4;
+        }
+        if($Ingredient5 != 0){
+          $Ingredients .= " / " . $Ingredient5;
+        }
+        if($Ingredient6 != 0){
+          $Ingredients .= " / " . $Ingredient6;
+        }
 
-                $Price  = $DishArray[$Course][$ct2]['Price'];
-                $GlutenFree    = (bool) $DishArray[$Course][$ct2]['GlutenFree'];
-                $Vegan         = (bool) $DishArray[$Course][$ct2]['Vegan'];
-                $Raw    = (bool) $DishArray[$Course][$ct2]['Raw'];
-                $Spicy         = (bool) $DishArray[$Course][$ct2]['Spicy'];
+        $Price  = $DishArray[$Course][$ct2]['Price'];
+        $GlutenFree    = (bool) $DishArray[$Course][$ct2]['GlutenFree'];
+        $Vegan         = (bool) $DishArray[$Course][$ct2]['Vegan'];
+        $Raw    = (bool) $DishArray[$Course][$ct2]['Raw'];
+        $Spicy         = (bool) $DishArray[$Course][$ct2]['Spicy'];
 
-                $Restrictions = restrictionBuilder($GlutenFree, $Vegan, $Raw, $Spicy);
+        $Restrictions = restrictionBuilder($GlutenFree, $Vegan, $Raw, $Spicy);
 
-                $Active  = (bool) $DishArray[$Course][$ct2]['Active'];
+        $Active  = (bool) $DishArray[$Course][$ct2]['Active'];
 
-                $EditLink = "editDish.php?DishID=" . $DishID;
-                $DeleteLink       = "deleteDish.php?DishID=" . $DishID;
+        $EditLink = "editDish.php?DishID=" . $DishID;
+        $DeleteLink       = "deleteDish.php?DishID=" . $DishID;
 
 
-                echo"<tr>
-                      <input type='hidden' name='DishID[".$ArrayCount."]'  value=$DishID>
-                      <td>" .$Course. "</td> <input type='hidden' name='Course[".$ArrayCount."]'  value=$Course>
-                      <td>" .$DishName. "</td> <input type='hidden' name='DishName[".$ArrayCount."]'  value=$DishName>
-                      <td> $Ingredients  </td> <input type='hidden' name='Ingredients[".$ArrayCount."]'  value=$Ingredients>
-                      <td> $Price  </td> <input type='hidden' name='Price[".$ArrayCount."]'  value=$Price>
-                      <td> $Restrictions  </td> <input type='hidden' name='Restrictions[".$ArrayCount."]'  value=$Restrictions>";
-                      if($Active){
-                        echo "<td> <input type='checkbox' name='Active[".$ArrayCount."]' value='Active' Checked></td> ";
-                      }
-                      else{
-                        echo "<td> <input type='checkbox' name='Active[".$ArrayCount."]' value='Active'></td>";
-                      }
-                      echo "
-                      <td><a href=" . $EditLink . " target='_blank'>  Edit   </a></td>  
-                      <td><a href=" . $DeleteLink . " target='_blank'>  Delete   </a></td></tr>  ";
+        echo"<tr>
+              <input type='hidden' name='DishID[".$ArrayCount."]'  value=$DishID>
+              <td>" .$Course. "</td> <input type='hidden' name='Course[".$ArrayCount."]'  value=$Course>
+              <td>" .$DishName. "</td> <input type='hidden' name='DishName[".$ArrayCount."]'  value=$DishName>
+              <td> $Ingredients  </td> <input type='hidden' name='Ingredients[".$ArrayCount."]'  value=$Ingredients>
+              <td> $Price  </td> <input type='hidden' name='Price[".$ArrayCount."]'  value=$Price>
+              <td> $Restrictions  </td> <input type='hidden' name='Restrictions[".$ArrayCount."]'  value=$Restrictions>";
+              if($Active){
+                echo "<td> <input type='checkbox' name='Active[".$ArrayCount."]' value='Active' Checked></td> ";
+              }
+              else{
+                echo "<td> <input type='checkbox' name='Active[".$ArrayCount."]' value='Active'></td>";
+              }
+              echo "
+              <td><a href=" . $EditLink . " target='_blank'>  Edit   </a></td>  
+              <td><a href=" . $DeleteLink . " target='_blank'>  Delete   </a></td></tr>  ";
 
-                $ArrayCount++;
+        $ArrayCount++;
         }
       }
 

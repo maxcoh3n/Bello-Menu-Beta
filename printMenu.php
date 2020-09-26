@@ -33,11 +33,11 @@
         ));
       }
 
-    echo "Menu: <select name = 'MenuID' required='required' >  ";
+    echo "Menu: <select name = 'MenuID|MenuName' required='required' >  ";
     for($ct = 0; $ct < count($MenuArray); $ct++){
         $MenuName = $MenuArray[$ct]['MenuName'];
         $MenuID = $MenuArray[$ct]['MenuID'];
-        echo "<option value=$MenuID > $MenuName </option>";
+        echo "<option value= '$MenuID|$MenuName' > $MenuName </option>";
     }
     
     
