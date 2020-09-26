@@ -14,8 +14,8 @@
   <h2> Menu Printer Page 2 </h2>
 
 
-  <form method="post" action="addDish.php" target="_blank">
-  <input type="submit" value="Add Dish">  
+  To add a new Dish, click <a href="addDish.php" target='_blank'>here</a>
+ 
   </form>
 
 
