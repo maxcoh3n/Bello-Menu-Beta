@@ -163,7 +163,6 @@ echo "
 <td>
 <input type="submit" value="Update Dish Data">
 </td>
-</tr>
 
 </table>
 </form>
