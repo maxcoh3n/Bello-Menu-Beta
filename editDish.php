@@ -14,6 +14,23 @@
 
 $NUM_INGREDIENTS = 6;
 
+$query= "SELECT `MenuName`, `MenuID` FROM Menus ORDER BY MenuID" ;
+    //print $query;
+    $result= mysqli_query($cxn,$query);
+    if ($cxn->connect_error) {
+      die("Connection failed: " . $cxn->connect_error);
+    }
+    
+    $MenuArray = array();
+
+      while($row = mysqli_fetch_assoc($result))
+      {
+        array_push($MenuArray,array(
+            'MenuName' => $row['MenuName'],
+            'MenuID' => $row['MenuID']
+        ));
+      }
+
 $DishID = $_GET['DishID'];
 
 
@@ -26,11 +43,17 @@ $ShipArray = array();
 $row = mysqli_fetch_assoc($result);
 
 $CourseArray = getCourses("Primary");
+
+$ActiveArray = array();
+for($ct = 0; $ct < count($MenuArray); $ct++){
+    $MenuActive = "Menu" . $MenuArray[$ct]['MenuID'] . "Active";
+    $ActiveArray[$MenuActive] = $row[$MenuActive];
+}
 	
 	$DishArray = array(
-        'CourseCategory'        =>$row['CourseCategory'],
-        'DishID'        =>$row['DishID'],
-        'DishName'        =>$row['DishName'],
+        'CourseCategory'   =>$row['CourseCategory'],
+        'DishID'           =>$row['DishID'],
+        'DishName'         =>$row['DishName'],
         'Ingredient1'      =>$row['Ingredient1'] ,
         'Ingredient2'      =>$row['Ingredient2'] ,
         'Ingredient3'      =>$row['Ingredient3'] ,
@@ -38,11 +61,11 @@ $CourseArray = getCourses("Primary");
         'Ingredient5'      =>$row['Ingredient5'] ,
         'Ingredient6'      =>$row['Ingredient6'] ,
         'Price'            =>$row['Price'] ,
-        'GlutenFree'      =>$row['GlutenFree'] ,
-        'Vegan'           =>$row['Vegan'],
-        'Raw'      =>$row['Raw'] ,
-        'Spicy'      =>$row['Spicy'] ,
-        'Active'          =>$row['Active']
+        'GlutenFree'       =>$row['GlutenFree'] ,
+        'Vegan'            =>$row['Vegan'],
+        'Raw'              =>$row['Raw'] ,
+        'Spicy'            =>$row['Spicy'] ,
+        'ActiveArray'      =>$ActiveArray
 		);
 	
 
@@ -65,11 +88,6 @@ foreach($CourseArray as $Course){
 }
 
 echo "
-</td>
-</tr>
-
-
-
 <tr>
 <td width=100>Dish Name</td>
 <td><input name='DishName' type='varchar' value=".$DishArray['DishName']."> </td>
@@ -91,72 +109,54 @@ echo "
 <td><input name='Price' type='varchar' value=".$DishArray['Price']." > </td>
 </tr>";
 
-$checked = $DishArray[$curIngredient]? 'hecked' : '';
+    $checked = $DishArray['GlutenFree']? 'checked' : '';
 
-if($DishArray['Active']){
     echo "<tr>
-    <td width=100>Active</td>
-    <td> <input type='checkbox' name='Active' value='Active' Checked></td> 
+    <td width=100>Gluten Free</td>
+    <td> <input type='checkbox' name='GlutenFree' value='GlutenFree' $checked></td> 
     </tr>";
-}
-else{
-    echo "<tr>
-    <td width=100>Active</td>
-    <td> <input type='checkbox' name='Active' value='Active'></td> 
-    </tr>";
-}
 
-if($DishArray['GlutenFree']){
-    echo "<tr>
-    <td width=100>GlutenFree</td>
-    <td> <input type='checkbox' name='GlutenFree' value='GlutenFree' Checked></td> 
-    </tr>";
-}
-else{
-    echo "<tr>
-    <td width=100>GlutenFree</td>
-    <td> <input type='checkbox' name='GlutenFree' value='GlutenFree'></td> 
-    </tr>";
-}
+    $checked = $DishArray['Vegan']? 'checked' : '';
 
-if($DishArray['Vegan']){
     echo "<tr>
     <td width=100>Vegan</td>
-    <td> <input type='checkbox' name='Vegan' value='Vegan' Checked></td> 
+    <td> <input type='checkbox' name='Vegan' value='Vegan' $checked></td> 
     </tr>";
-}
-else{
-    echo "<tr>
-    <td width=100>Vegan</td>
-    <td> <input type='checkbox' name='Vegan' value='Vegan'></td> 
-    </tr>";
-}
 
-if($DishArray['Raw']){
+    $checked = $DishArray['Raw']? 'checked' : '';
+
     echo "<tr>
     <td width=100>Raw</td>
-    <td> <input type='checkbox' name='Raw' value='Raw' Checked></td> 
+    <td> <input type='checkbox' name='Raw' value='Raw' $checked></td> 
     </tr>";
-}
-else{
-    echo "<tr>
-    <td width=100>Raw</td>
-    <td> <input type='checkbox' name='Raw' value='Raw'></td> 
-    </tr>";
-}
 
-if($DishArray['Spicy']){
+    $checked = $DishArray['Spicy']? 'checked' : '';
+
     echo "<tr>
     <td width=100>Spicy</td>
-    <td> <input type='checkbox' name='Spicy' value='Spicy' Checked></td> 
+    <td> <input type='checkbox' name='Spicy' value='GlutenFree' $checked></td> 
     </tr>";
-}
-else{
-    echo "<tr>
-    <td width=100>Spicy</td>
-    <td> <input type='checkbox' name='Spicy' value='Spicy'></td> 
-    </tr>";
-}
+
+    if(count($MenuArray)>0){
+		echo "<tr>
+			<th> Menu </th> 
+			<th> Active on This Menu</th>
+			</tr>
+		";
+	}
+	  
+	 for($ct = 0; $ct < count($MenuArray); $ct++){
+        $MenuActive = "Menu" . $MenuArray[$ct]['MenuID'] . "Active";
+        $checked = $DishArray['ActiveArray'][$MenuActive]? 'checked' : '';
+
+		echo 
+			"<tr> 
+			<td> ".$MenuArray[$ct]['MenuName'] ."</td>
+			<td> <input type = 'checkbox' name = ActiveArray[$ct] $checked> </td>
+			<input type = 'hidden' name =MenuIDArray[$ct] value = ".$MenuArray[$ct]['MenuID']." >
+			</tr>
+		";	
+	 } 
 
 ?>
 
