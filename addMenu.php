@@ -59,7 +59,7 @@ $query= "SELECT DISTINCT TopText, BottomText, BackText FROM Menus ORDER BY MenuI
 	</tr>
 
 	";
-	//* ADD CODE HERE TO GET ALL COURSES FROM DB, AND THEN allow user to select which courses they want on this menu
+	//* GET ALL COURSES FROM DB, AND THEN allow user to select which courses they want on this menu
 	$query= "SELECT `CourseName`, `CourseID` FROM Courses ORDER BY `CourseID`" ;
     //print $query;
     $result= mysqli_query($cxn,$query);
@@ -97,7 +97,7 @@ $query= "SELECT DISTINCT TopText, BottomText, BackText FROM Menus ORDER BY MenuI
 
 	?>
 
-  <td>To add a new Course, click <a href="addCorse.php" target='_blank'>here</a></td>
+  <!-- <td>To add a new Course, click <a href="addCourse.php" target='_blank'>here</a></td> -->
 
 
 	<tr>
