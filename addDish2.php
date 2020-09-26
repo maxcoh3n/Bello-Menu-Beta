@@ -45,10 +45,6 @@ for($ct = 0; $ct < count($MenuIDArray); $ct++){
 $MenuActiveCols = substr($MenuActiveCols, 0, -2);
 $MenuActiveVals = substr($MenuActiveVals, 0, -2);
 
-
-$Actives = 'Menu1Active, Menu11Active';
-$ActiveVals = '0,1';
-
 $query1 = "INSERT INTO `Dishes` (CourseCategory,DishName,Ingredient1,Ingredient2,Ingredient3,Ingredient4,Ingredient5,Ingredient6,Price,GlutenFree,Vegan,$MenuActiveCols, Raw)
 
 VALUES
