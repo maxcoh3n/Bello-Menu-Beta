@@ -34,13 +34,9 @@ $query= "SELECT DISTINCT TopText, BottomText, BackText FROM Menus ORDER BY MenuI
 
 
 	echo        
-		"<table>
-		<tr>
-		</tr>
-		";	
-
-	echo "
-
+	"<table>
+	<tr>
+	</tr>
 
 	<tr>
 	<td>Menu Name</td>
@@ -62,22 +58,58 @@ $query= "SELECT DISTINCT TopText, BottomText, BackText FROM Menus ORDER BY MenuI
 	<td><textarea type='text' name='BackText' id='TopText' required='required' rows = 10 cols = 30>".$TextArray['BackText']."</textarea></td>
 	</tr>
 
-	
-	<tr>
-	<td>Active (on the Current Menu)</td>
-	<td><input type='checkbox' name='Active' id='Active' checked></td>
-	</tr> 
-
-	<tr>
-	<td><input type='submit' value=' Submit ' name='submit'/></td>
-	</tr>
 	";
+	//* ADD CODE HERE TO GET ALL COURSES FROM DB, AND THEN allow user to select which courses they want on this menu
+	$query= "SELECT `CourseName`, `CourseID` FROM Courses ORDER BY `CourseID`" ;
+    //print $query;
+    $result= mysqli_query($cxn,$query);
+    if ($cxn->connect_error) {
+      die("Connection failed: " . $cxn->connect_error);
+    }
+    
+    $CourseArray = array();
 
-echo "</table>";
-echo "</form>";
+	while($row = mysqli_fetch_assoc($result))
+	{
+	  array_push($CourseArray, array(
+		'CourseName'        =>$row['CourseName'],
+		'CourseID'        =>$row['CourseID']
+	  ));
+	}
+
+	if(count($CourseArray) >0){
+		echo "<tr>
+			<th> Course </th> 
+			<th> Course Order (1 to n, leave blank if not on this menu)</th>
+			</tr>
+		";
+	}
+
+	for($ct = 0; $ct < count($CourseArray); $ct ++){
+		echo "<tr>
+			<td>". $CourseArray[$ct]['CourseName'] ."</td> 
+			<td><input type='number' name=CourseIDArray[".$ct."]' ></td>
+			<input type='hidden' name='CourseOrderArray[".$ct."]' value =".$CourseArray[$ct]['CourseID'] .">
+			</tr>
+		";
+	}
 
 
-?>
+	?>
+
+  <td>To add a new Course, click <a href="addCorse.php" target='_blank'>here</a></td>
+
+
+	<tr>
+	<td><input type='submit' value='Submit' name='submit'/></td>
+	</tr>
+	
+
+
+</form>
+
+
+
 
 </body>
 </html>
