@@ -68,7 +68,7 @@ $query= "SELECT * FROM `Menus` WHERE `MenuID` = $MenuID" ;
 
 	//* GET ALL COURSES FROM DB, AND THEN allow user to select which courses they want on this menu
 	$query= "SELECT `CourseName`, `CourseID`, `$MenuOrder` FROM `Courses` ORDER BY `$MenuOrder`" ;
-    //print $query;
+    // print $query;
     $result= mysqli_query($cxn,$query);
     if ($cxn->connect_error) {
       die("Connection failed: " . $cxn->connect_error);
@@ -96,8 +96,8 @@ $query= "SELECT * FROM `Menus` WHERE `MenuID` = $MenuID" ;
 	for($ct = 0; $ct < count($CourseArray); $ct ++){
 		echo "<tr>
 			<td>". $CourseArray[$ct]['CourseName'] ."</td> 
-			<td><input type='number' name=CourseIDArray[$ct] value = $MenuOrder></td>
-			<input type='hidden' name=CourseOrderArray[$ct] value =".$CourseArray[$ct]['CourseID'] .">
+			<td><input type='number' name=CourseOrderArray[$ct] value = ".$CourseArray[$ct]['MenuOrder'] ." ></td>
+			<input type='hidden' name=CourseIDArray[$ct] value =".$CourseArray[$ct]['CourseID'] .">
 			</tr>
 		";
 	}

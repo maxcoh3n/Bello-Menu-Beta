@@ -18,7 +18,7 @@ $BackText = $cxn->real_escape_string($_POST["BackText"]);
 $CourseIDArray = $_POST["CourseIDArray"];
 $CourseOrderArray = $_POST["CourseOrderArray"];
 $DishIDArray = $_POST["DishIDArray"];
-$ActiveArray = $_POST["ActiveArray"];
+$ActiveArray = isset($_POST['ActiveArray'])? $_POST['ActiveArray'] : array();
 
 
 
@@ -57,7 +57,7 @@ for($ct = 0; $ct < count($CourseIDArray); $ct++){
     $Order = $CourseOrderArray[$ct];
 
     $query= "UPDATE Courses SET `$MenuOrder` = '$Order' WHERE `CourseID` = $CourseID" ;
-    // print $query;
+    // print $query . "<br>";
     $result= mysqli_query($cxn,$query);
     if ($cxn->connect_error) {
       die("Connection failed: " . $cxn->connect_error);
