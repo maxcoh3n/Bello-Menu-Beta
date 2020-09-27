@@ -1,3 +1,4 @@
+<?php   include 'common/auth.php'; ?>
   <html>
   <head>
   <title>Print The Menu</title>

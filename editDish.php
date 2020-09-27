@@ -1,3 +1,5 @@
+<?php   include 'common/auth.php'; ?>
+
 <html>
   <head>
   <title>Edit Dish</title>

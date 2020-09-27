@@ -1,3 +1,4 @@
+<?php   include 'common/auth.php'; ?>
 <html>
   <head>
   <title>Print The Menu</title>
@@ -5,7 +6,6 @@
   <body>
 
   <?php 
-  include 'common/auth.php';
   include 'common/bellodentrostarter.php'; 
   ?>
 

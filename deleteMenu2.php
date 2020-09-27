@@ -1,3 +1,5 @@
+<?php   include 'common/auth.php'; ?>
+
 <html>
 <head>
 <title>Delete Menu 2</title>

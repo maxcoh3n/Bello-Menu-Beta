@@ -1,3 +1,5 @@
+<?php   include 'common/auth.php'; ?>
+
   <html>
   <head>
   <title>Print The Menu</title>
@@ -17,8 +19,6 @@ $MenuID = $_POST['MenuID'];
 $DishIDArray = $_POST['DishID'];
 $ActiveArray = $_POST['Active'];
 $MenuActive = "Menu" . $MenuID . "Active";
-
-
 
 // FIRST, Update the database and set dishes to be active or incative
   for($ct = 0; $ct < count($DishIDArray); $ct++){
