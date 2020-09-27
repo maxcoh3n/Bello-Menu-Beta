@@ -13,12 +13,12 @@ echo "<h3> Add a Dish Page 2 </h3>";
 
 $CourseCategory = $_POST["CourseCategory"];
 $DishName = ucwords($_POST["DishName"]);
-$Ingredient1 = $_POST["Ingredient1"];
-$Ingredient2 = $_POST["Ingredient2"];
-$Ingredient3 = $_POST["Ingredient3"];
-$Ingredient4 = $_POST["Ingredient4"];
-$Ingredient5 = $_POST["Ingredient5"];
-$Ingredient6 = $_POST["Ingredient6"];
+$Ingredient1 = $cxn->real_escape_string($_POST["Ingredient1"]);
+$Ingredient2 = $cxn->real_escape_string($_POST["Ingredient2"]);
+$Ingredient3 = $cxn->real_escape_string($_POST["Ingredient3"]);
+$Ingredient4 = $cxn->real_escape_string($_POST["Ingredient4"]);
+$Ingredient5 = $cxn->real_escape_string($_POST["Ingredient5"]);
+$Ingredient6 = $cxn->real_escape_string($_POST["Ingredient6"]);
 $Price = $_POST["Price"];
 
 $GlutenFree = (isset($_POST["GlutenFree"]))? 1: 0;

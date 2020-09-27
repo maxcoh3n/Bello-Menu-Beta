@@ -92,18 +92,21 @@ foreach($CourseArray as $Course){
 echo "
 <tr>
 <td width=100>Dish Name</td>
-<td><input name='DishName' type='varchar' value=".$DishArray['DishName']."> </td>
+<td><input name='DishName' type='varchar' value='".$DishArray['DishName']."'> </td>
 </tr>
 
-<input name = 'DishID' type = 'hidden' value =".$DishArray['DishID'].">";
+<input name = 'DishID' type = 'hidden' value =".$DishArray['DishID'].">
+";
 
 for($ct =1; $ct <= $NUM_INGREDIENTS; $ct++){
-    $curIngredient = "Ingredient" . $ct;
-    echo "<tr>
-    <td width=100>Ingredient".$ct."</td>
-    <td><input name=$curIngredient type='varchar' value=".$DishArray[$curIngredient]." > </td>
-    </tr>";
+    $curIngredient = "Ingredient" . $ct; ?>
+    <tr>
+    <td width=100><?php echo "Ingredient".$ct; ?> </td>
+    <td><input name=<?php echo $curIngredient;?> type="varchar" value="<?php echo $DishArray[$curIngredient];?>" > </td>
+    </tr>
+    <?php
 }
+
 
 echo "
 <tr>
