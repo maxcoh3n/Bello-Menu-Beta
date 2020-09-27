@@ -9,8 +9,12 @@
 
 include 'common/bellodentrostarter.php'; ?>
 
+<h3> Add a Dish Page 1 </h3>
+
 <form method="post" action="addDish2.php">
 
+
+<p>Don't worry about capitalization, it is all handled for you</p>
 <?php
 
 	echo        

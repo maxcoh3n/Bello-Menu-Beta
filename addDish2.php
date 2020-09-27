@@ -5,9 +5,10 @@
 <body>
 
 
+
 <?php  include 'common/bellodentrostarter.php';
 
-echo "<h3>Menu Item Entry</h3>";
+echo "<h3> Add a Dish Page 2 </h3>";
 
 
 $CourseCategory = $_POST["CourseCategory"];
@@ -65,11 +66,14 @@ VALUES
 	)
 ";
 
-echo $query1 . "<br>";
+// echo $query1 . "<br>";
 $result1= mysqli_query($cxn,$query1)
 			or die ("Database Query1 to insert data did not work, please contact I.T.");
-			echo "$DishName added to database\n";
+			echo "$DishName added to database <br>";
 
+		
 ?>
+
+Add <a href="addDish.php">another dish</a>
 </body>
 </html>
