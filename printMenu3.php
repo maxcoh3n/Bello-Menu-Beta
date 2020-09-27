@@ -48,7 +48,7 @@ foreach(getCourses($MenuID) as $row){
 
 
 
-  $query= "SELECT * FROM Dishes WHERE $MenuActive = 1 ORDER BY CourseCategory, Price" ;
+  $query= "SELECT * FROM Dishes WHERE $MenuActive = 1 ORDER BY CourseCategory, DishName" ;
   //print $query;
   $result= mysqli_query($cxn,$query);
   if ($cxn->connect_error) {
@@ -125,7 +125,7 @@ foreach(getCourses($MenuID) as $row){
 
 
                 echo"
-                      <span class = dishName >$DishName</span><span class = ingredients >$Ingredients</span><span class = price >$Price</span>
+                      <span class = dishName >$DishName </span><span class = ingredients >$Ingredients</span><span class = price > \$$Price</span>
                       <span class = restrictions >$Restrictions</span> <br>";
               
 

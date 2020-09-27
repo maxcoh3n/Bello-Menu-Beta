@@ -35,7 +35,7 @@
     $DishArray[$row['CourseName']] = array();
   }
 
-  $query= "SELECT * FROM Dishes ORDER BY CourseCategory, Price" ;
+  $query= "SELECT * FROM Dishes ORDER BY CourseCategory, DishName" ;
   //print $query;
   $result= mysqli_query($cxn,$query);
   if ($cxn->connect_error) {
@@ -102,22 +102,24 @@
         $Ingredient5      = $DishArray[$Course][$ct2]['Ingredient5'];
         $Ingredient6      = $DishArray[$Course][$ct2]['Ingredient6'];
 
-        $Ingredients = $Ingredient1;
-        if($Ingredient2 != 0){
-          $Ingredients .= " / " . $Ingredient2;
+        $Ingredients = ucfirst($Ingredient1);
+        if($Ingredient2 != ""){
+          $Ingredients .= " / " . ucfirst($Ingredient2);
         }
-        if($Ingredient3 != 0){
-          $Ingredients .= " / " . $Ingredient3;
+        if($Ingredient3 != ""){
+          $Ingredients .= " / " . ucfirst($Ingredient3);
         }
-        if($Ingredient4 != 0){
-          $Ingredients .= " / " . $Ingredient4;
+        if($Ingredient4 != ""){
+          $Ingredients .= " / " . ucfirst($Ingredient4);
         }
-        if($Ingredient5 != 0){
-          $Ingredients .= " / " . $Ingredient5;
+        if($Ingredient5 != ""){
+          $Ingredients .= " / " . ucfirst($Ingredient5);
         }
-        if($Ingredient6 != 0){
-          $Ingredients .= " / " . $Ingredient6;
+        if($Ingredient6 != ""){
+          $Ingredients .= " / " . ucfirst($Ingredient6);
         }
+
+        // echo "Ingredients: " . $Ingredients;
 
         $Price  = $DishArray[$Course][$ct2]['Price'];
         $GlutenFree    = (bool) $DishArray[$Course][$ct2]['GlutenFree'];
@@ -136,7 +138,7 @@
         echo"<tr>
               <input type='hidden' name='DishID[".$ArrayCount."]'  value=$DishID>
               <td>" .$Course. "</td> <input type='hidden' name='Course[".$ArrayCount."]'  value=$Course>
-              <td>" .$DishName. "</td> <input type='hidden' name='DishName[".$ArrayCount."]'  value=$DishName>
+              <td>" .strtoupper($DishName). "</td> <input type='hidden' name='DishName[".$ArrayCount."]'  value=$DishName>
               <td> $Ingredients  </td> <input type='hidden' name='Ingredients[".$ArrayCount."]'  value=$Ingredients>
               <td> $Price  </td> <input type='hidden' name='Price[".$ArrayCount."]'  value=$Price>
               <td> $Restrictions  </td> <input type='hidden' name='Restrictions[".$ArrayCount."]'  value=$Restrictions>";
