@@ -11,13 +11,15 @@ function getCourses($MenuID){
 
     $MenuOrder = "Menu" . $MenuID . "Order";
 
-    $query= "SELECT CourseName, ExtendedName FROM Courses WHERE '$MenuOrder' IS NOT NULL ORDER BY '$MenuOrder'" ;
+    $query= "SELECT CourseName, ExtendedName FROM Courses WHERE '$MenuOrder' IS NOT NULL ORDER BY `$MenuOrder`" ;
+    // echo $query . "<br>";
     $result= mysqli_query($cxn,$query) or die ("Database query to get Courses didn't work. Please contact IT.");;
     if ($cxn->connect_error) {
       die("Connection failed: " . $cxn->connect_error);
     }
 
   }else{
+
     $query= "SELECT CourseName, ExtendedName FROM Courses" ;
     $result= mysqli_query($cxn,$query) or die ("Database query to get Courses didn't work. Please contact IT.");;
     if ($cxn->connect_error) {
@@ -35,6 +37,7 @@ function getCourses($MenuID){
         ));
     }
 
+    // print_r($CourseArray);
 
   return $CourseArray;
 }
