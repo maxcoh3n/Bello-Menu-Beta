@@ -152,6 +152,9 @@ foreach(getCourses($MenuID) as $row){
       }
       echo "<span class='bottomText arial'>".$TextArray['BottomText']." </span>";
 
+      $PrintBackPage = FALSE;
+
+      if($PrintBackPage){
       echo " <img src=belloLogo.png width = 150px height = 75px class = centerImg >"; 
       echo "<div class=center>";
       echo "<span class=subtitle>".$TextArray['TopText']." </span>";
@@ -166,12 +169,9 @@ foreach(getCourses($MenuID) as $row){
       $backText =  implode("</span>",$res_str);
       $backText = str_replace("*", "<span class=bold >", $backText); 
 
-      // $torp = "This is a *sentence*. Yes, this *sentence* is very cool";
-      // str_replace("*", "GOLLY", $torp); 
-      // echo $torp;
-
 
       echo "<span class='backText arial'>".$backText." </span>";
+    }
 
       
 
