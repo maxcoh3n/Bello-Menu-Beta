@@ -5,12 +5,12 @@
   <title>Print The Menu</title>
   </head>
   <body>
-
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
   <?php
 
   include 'common/databaseConnection.php';
   echo "<style>";
-  include 'printthemenu2.css';
+  include 'printMenu3.css';
   echo "</style>";
   include 'common/restrictionBuilder.php';
   include 'common/courses.php';
@@ -34,19 +34,34 @@ $MenuActive = "Menu" . $MenuID . "Active";
   
 }
 
+// SET TEXT ON MENU------------------------------------------
+$query= "SELECT * FROM `Menus` WHERE `MenuID` = $MenuID" ;
+    //print $query;
+    $result= mysqli_query($cxn,$query);
+    if ($cxn->connect_error) {
+      die("Connection failed: " . $cxn->connect_error);
+    }
+    
+    $TextArray = array();
+
+      $row = mysqli_fetch_assoc($result);
+        $TextArray = array(
+			'TopText' => $row['TopText'],
+			'BottomText' => $row['BottomText'],
+            'BackText' => $row['BackText']
+        );
+
+        echo " <img src=belloLogo.png width = 150px height = 75px class = centerImg >";
+        echo "<div class=center>";
+        echo "<span class=subtitle>".$TextArray['TopText']." </span>";
+        echo "</div>";
+
 
 
 $DishArray = array();
 foreach(getCourses($MenuID) as $row){
   $DishArray[$row['CourseName']] = array();
 }
-
-
-  echo "<div class = grid>";
-  echo " <img src=belloLogo.png width = 150px height = 75px />";
-  echo "</div>";
-
-
 
   $query= "SELECT * FROM Dishes WHERE $MenuActive = 1 ORDER BY CourseCategory, DishName" ;
   //print $query;
@@ -80,13 +95,16 @@ foreach(getCourses($MenuID) as $row){
   $ArrayCount = 0;
   $CourseArray = getCourses($MenuID);
 
-  echo "<div class=center>";
+  // echo "<div class=center>";
     for($ct=0;$ct<count($CourseArray);$ct++) //goes through entire courseArray
     {
       $Course = $CourseArray[$ct]['CourseName'];
       $CourseExtendedName = $CourseArray[$ct]['ExtendedName'];
 
+      echo "<div class=center>";
       echo "<span class = course> $CourseExtendedName</span><br>";
+      echo "</div>";
+
       for($ct2 = 0; $ct2 < count($DishArray[$Course]);$ct2++){
 
                 $DishID           = $DishArray[$Course][$ct2]['DishID'];
@@ -124,14 +142,38 @@ foreach(getCourses($MenuID) as $row){
                 $Restrictions = restrictionBuilder($GlutenFree, $Vegan, $Raw, $Spicy);              
 
 
-                echo"
-                      <span class = dishName >$DishName </span><span class = ingredients >$Ingredients</span><span class = price > \$$Price</span>
-                      <span class = restrictions >$Restrictions</span> <br>";
+                echo" </div class = left>
+                      <span class = arial><span class = dishName >$DishName </span><span class = ingredients >$Ingredients</span><span class = price > \$$Price</span>
+                      <span class = restrictions >$Restrictions</span></span> </div><br>";
               
 
                 $ArrayCount++;
         }
       }
+      echo "<span class='bottomText arial'>".$TextArray['BottomText']." </span>";
+
+      echo " <img src=belloLogo.png width = 150px height = 75px class = centerImg >"; 
+      echo "<div class=center>";
+      echo "<span class=subtitle>".$TextArray['TopText']." </span>";
+      echo "</div>";
+
+      $backText = $TextArray['BackText'];
+
+      $res_str = array_chunk(explode("*",$backText),2);
+      foreach( $res_str as &$val){
+        $val  = implode("*",$val);
+      }
+      $backText =  implode("</span>",$res_str);
+      $backText = str_replace("*", "<span class=bold >", $backText); 
+
+      // $torp = "This is a *sentence*. Yes, this *sentence* is very cool";
+      // str_replace("*", "GOLLY", $torp); 
+      // echo $torp;
+
+
+      echo "<span class='backText arial'>".$backText." </span>";
+
+      
 
       
 
