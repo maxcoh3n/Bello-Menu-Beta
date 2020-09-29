@@ -60,6 +60,11 @@ $query= "SELECT * FROM `Menus` WHERE `MenuID` = $MenuID" ;
 	</tr>
 
 	<tr>
+	<td></td>
+	<td>Please surround bolded Text with \"*\"s</td>
+	</tr>
+
+	<tr>
 	<td>Back Text</td>
 	<td><textarea type='text' name='BackText' id='TopText' required='required' rows = 10 cols = 30>".$TextArray['BackText']."</textarea></td>
 	</tr>
