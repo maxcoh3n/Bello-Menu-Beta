@@ -34,6 +34,9 @@ $MenuActive = "Menu" . $MenuID . "Active";
   
 }
 
+$TOTAL_PIXELS = 955;
+$curPixels = $TOTAL_PIXELS;
+
 // SET TEXT ON MENU------------------------------------------
 $query= "SELECT * FROM `Menus` WHERE `MenuID` = $MenuID" ;
     //print $query;
@@ -50,8 +53,6 @@ $query= "SELECT * FROM `Menus` WHERE `MenuID` = $MenuID" ;
 			'BottomText' => $row['BottomText'],
             'BackText' => $row['BackText']
         );
-
-        echo "<div class=grid>";
         echo " <img src=belloLogo.png width = 170px height = 80px class = centerImg >";
         echo "<div class=center>";
         echo "<span class=subtitle>".$TextArray['TopText']." </span>";
@@ -143,15 +144,15 @@ foreach(getCourses($MenuID) as $row){
                 $Restrictions = restrictionBuilder($GlutenFree, $Vegan, $Raw, $Spicy);              
 
 
-                echo" </div class = left>
+                echo" <div class = left >
                       <span class = arial><span class = dishName >$DishName </span><span class = ingredients >$Ingredients</span><span class = price > \$$Price</span>
-                      <span class = restrictions >$Restrictions</span></span> </div><br>";
+                      <span class = restrictions >$Restrictions</span></span> </div>";
               
 
                 $ArrayCount++;
         }
       }
-      echo "<span class='bottomText arial'>".$TextArray['BottomText']." </span>";
+      echo "<span class='bottomText arial left'>".$TextArray['BottomText']." </span>";
 
       $PrintBackPage = FALSE;
 
@@ -171,8 +172,8 @@ foreach(getCourses($MenuID) as $row){
       $backText = str_replace("*", "<span class=bold >", $backText); 
 
 
-      echo "<span class='backText arial'>".$backText." </span>";
-      echo "</div>";
+      echo "<span class='backText arial left'>".$backText." </span>";
+      // echo "</div>"; 
 
     }
 
