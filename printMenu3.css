@@ -13,42 +13,43 @@
     /* width: 50%; */
   }
 
-grid{
-
+.grid{
+    display: grid;
+    box-sizing: border-box;
 }
 
 .subtitle{
-    font-size: 14px;
+    font-size: 17px;
     font-family: 'Oswald';
 }
 
 .course{
-    font-size: 11px;
+    font-size: 15px;
     font-weight: 700;
 }
 
 .title{
-    font-size: 10px;
+    font-size: 13px;
 }
 
 .dishName{
-    font-size: 10px;
+    font-size: 13px;
     text-transform: uppercase;
     font-weight: 700;
 }
 
 .ingredients{
-    font-size: 10px;
+    font-size: 13px;
     text-transform: capitalize;
     font-style: italic;
 }
 
 .price{
-    font-size: 10px; 
+    font-size: 13px; 
 }
 
 .restrictions{
-    font-size: 6px;
+    font-size: 9px;
 }
 
 .arial{
@@ -56,14 +57,17 @@ grid{
 }
 
 .bottomText{
-    font-size: 8px;
+    white-space: pre-wrap;
+    font-size: 10px;
     font-weight: 700;
 }
 
 .backText{
     white-space: pre-wrap;
+    font-size: 13px;
 }
 
 .bold{
     font-weight: 700;  
 }
+

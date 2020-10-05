@@ -51,7 +51,8 @@ $query= "SELECT * FROM `Menus` WHERE `MenuID` = $MenuID" ;
             'BackText' => $row['BackText']
         );
 
-        echo " <img src=belloLogo.png width = 150px height = 75px class = centerImg >";
+        echo "<div class=grid>";
+        echo " <img src=belloLogo.png width = 170px height = 80px class = centerImg >";
         echo "<div class=center>";
         echo "<span class=subtitle>".$TextArray['TopText']." </span>";
         echo "</div>";
@@ -171,6 +172,8 @@ foreach(getCourses($MenuID) as $row){
 
 
       echo "<span class='backText arial'>".$backText." </span>";
+      echo "</div>";
+
     }
 
       
