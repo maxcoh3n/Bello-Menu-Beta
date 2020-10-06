@@ -74,5 +74,19 @@
     height: 954px;
 }
 
+.onePx{
+    height: 1px;
+}
+
+.fivePx{
+    height: 5px;
+}
+
+.grid{
+    display: grid;
+    height: 951px; 
+    grid-template-rows: 15% 78% 7%;
+}
+
 
 

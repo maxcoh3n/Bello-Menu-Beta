@@ -34,10 +34,13 @@ $MenuActive = "Menu" . $MenuID . "Active";
   
 }
 
-$TOTAL_PIXELS = 955;
+// $TOTAL_PIXELS = 955; //total on screen
+// each line is about 17.6 pixels
+// $TOTAL_PIXELS = 815; //total before backer
+$TOTAL_PIXELS = 751;
 $curPixels = $TOTAL_PIXELS;
 
-// SET TEXT ON MENU------------------------------------------
+// GET TEXT ----------------------------------
 $query= "SELECT * FROM `Menus` WHERE `MenuID` = $MenuID" ;
     //print $query;
     $result= mysqli_query($cxn,$query);
@@ -53,17 +56,15 @@ $query= "SELECT * FROM `Menus` WHERE `MenuID` = $MenuID" ;
 			'BottomText' => $row['BottomText'],
             'BackText' => $row['BackText']
         );
-        echo " <img src=belloLogo.png width = 170px height = 80px class = centerImg >";
-        echo "<div class=center>";
-        echo "<span class=subtitle>".$TextArray['TopText']." </span>";
-        echo "</div>";
 
-
-
+//GET DISHES---------------------------------------------------------------------------------
 $DishArray = array();
 foreach(getCourses($MenuID) as $row){
   $DishArray[$row['CourseName']] = array();
 }
+
+$NumCourses = count($DishArray);
+$NumDishes = 0;
 
   $query= "SELECT * FROM Dishes WHERE $MenuActive = 1 ORDER BY CourseCategory, DishName" ;
   //print $query;
@@ -74,6 +75,7 @@ foreach(getCourses($MenuID) as $row){
 
   while($row = mysqli_fetch_assoc($result))
   {
+    $NumDishes++;
     array_push($DishArray[$row['CourseCategory']], array(
       'DishID'        =>$row['DishID'],
       'DishName'        =>$row['DishName'],
@@ -92,20 +94,52 @@ foreach(getCourses($MenuID) as $row){
     ));
   }
 
+  $curPixels -= ($NumCourses * 17);
+  $curPixels -= ($NumDishes * 18);
+
+  echo "<div class =grid>";
+  //PRINT TOP TEXT----------------------------------------------------------
+        echo "<div class = top >";
+        echo "<br><br> <img src=belloLogo.png width = 167px height = 80px class = centerImg >";
+        echo "<div class='center subtitle'>".$TextArray['TopText']." </div>";
+        echo "</div>";//top
+
+        // for($ct =0; $ct < 751 ; $ct ++){
+        //   echo "<div class = onePx > </div>";
+        //   // echo" <div class = left >
+        //   //             <span class = arial><span class = dishName >DishName </span><span class = ingredients >Ingredient1 / Ingredient2 / Ingredient3 / Ingredient4 </span><span class = price > \$45</span>
+        //   //             <span class = restrictions >GF V</span></span> </div>";
+        //   // echo "div "
+        // }
+        for($ct =0; $ct < 44 ; $ct ++){
+          // echo "<div class=center>";
+          // echo "<span class = course> Antipasti</span><br>";
+          // echo "</div>";
+          // echo" <div class = left >
+          //             <span class = arial><span class = dishName >DishName </span><span class = ingredients >Ingredient1 / Ingredient2 / Ingredient3 / Ingredient4 </span><span class = price > \$45</span>
+          //             <span class = restrictions >GF V</span></span> </div>";
+        }
+
+
+
+
+//PRINT MAIN MENU-----------------------------------------------------------
   // print_r($DishArray);
 
   $ArrayCount = 0;
   $CourseArray = getCourses($MenuID);
+
+  echo "<div class = main >";
 
   // echo "<div class=center>";
     for($ct=0;$ct<count($CourseArray);$ct++) //goes through entire courseArray
     {
       $Course = $CourseArray[$ct]['CourseName'];
       $CourseExtendedName = $CourseArray[$ct]['ExtendedName'];
-
-      echo "<div class=center>";
-      echo "<span class = course> $CourseExtendedName</span><br>";
-      echo "</div>";
+      // echo "<div class=>";
+      echo "<br><br><div class = 'center course'> $CourseExtendedName</div>";
+      echo "<div class = fivePx> </div>";
+      // echo "</div>";
 
       for($ct2 = 0; $ct2 < count($DishArray[$Course]);$ct2++){
 
@@ -152,8 +186,24 @@ foreach(getCourses($MenuID) as $row){
                 $ArrayCount++;
         }
       }
-      echo "<span class='bottomText arial left'>".$TextArray['BottomText']." </span>";
+      echo "</div>"; //main
 
+
+      // for($ct =0; $ct < $curPixels ; $ct ++){
+      //   echo "<div class=onePx > </div>";
+       
+      // }
+      
+      //PRINT BOTTOM TEXT----------------------------------
+      echo "<div class = bottom>";
+      echo "<span class='bottomText arial left'>".$TextArray['BottomText']." </span>";
+      echo "</div>"; //bottom
+
+
+      echo "</div>"; // grid
+
+
+      //PRINT BACK PAGE IF SPECIFIED--------------------------------------
       $PrintBackPage = FALSE;
 
       if($PrintBackPage){
@@ -171,11 +221,13 @@ foreach(getCourses($MenuID) as $row){
       $backText =  implode("</span>",$res_str);
       $backText = str_replace("*", "<span class=bold >", $backText); 
 
+      
+
 
       echo "<span class='backText arial left'>".$backText." </span>";
-      // echo "</div>"; 
 
     }
+
 
       
 
