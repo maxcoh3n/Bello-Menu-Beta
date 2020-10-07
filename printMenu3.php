@@ -137,7 +137,7 @@ $NumDishes = 0;
       $Course = $CourseArray[$ct]['CourseName'];
       $CourseExtendedName = $CourseArray[$ct]['ExtendedName'];
       // echo "<div class=>";
-      echo "<br><br><div class = 'center course'> $CourseExtendedName</div>";
+      echo "<br><div class = 'center course'> $CourseExtendedName</div>";
       echo "<div class = fivePx> </div>";
       // echo "</div>";
 
@@ -196,7 +196,7 @@ $NumDishes = 0;
       
       //PRINT BOTTOM TEXT----------------------------------
       echo "<div class = bottom>";
-      echo "<span class='bottomText arial left'>".$TextArray['BottomText']." </span>";
+      echo "<br><span class='bottomText arial left'>".$TextArray['BottomText']." </span>";
       echo "</div>"; //bottom
 
 

@@ -95,5 +95,13 @@
     /* align-content: stretch; */
     /* display: table-column; */
     /* height: 100%; */
-/* }  */
+/* } */
+
+.top{
+    height: 143px; /* 143  */
+}
+
+.bottom{
+    height: 95px; /*143 */
+}
 
