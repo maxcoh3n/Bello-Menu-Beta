@@ -129,7 +129,7 @@ $NumDishes = 0;
   $ArrayCount = 0;
   $CourseArray = getCourses($MenuID);
 
-  echo "<div class = main >";
+  // echo "<div class = main >";
 
   // echo "<div class=center>";
     for($ct=0;$ct<count($CourseArray);$ct++) //goes through entire courseArray
@@ -186,7 +186,7 @@ $NumDishes = 0;
                 $ArrayCount++;
         }
       }
-      echo "</div>"; //main
+      // echo "</div>"; //main
 
 
       // for($ct =0; $ct < $curPixels ; $ct ++){
