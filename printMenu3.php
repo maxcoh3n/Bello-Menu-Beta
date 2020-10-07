@@ -35,10 +35,6 @@ $MenuActive = "Menu" . $MenuID . "Active";
 }
 
 // $TOTAL_PIXELS = 955; //total on screen
-// each line is about 17.6 pixels
-// $TOTAL_PIXELS = 815; //total before backer
-$TOTAL_PIXELS = 751;
-$curPixels = $TOTAL_PIXELS;
 
 // GET TEXT ----------------------------------
 $query= "SELECT * FROM `Menus` WHERE `MenuID` = $MenuID" ;
@@ -104,24 +100,6 @@ $NumDishes = 0;
         echo "<div class='center subtitle'>".$TextArray['TopText']." </div>";
         echo "</div>";//top
 
-        // for($ct =0; $ct < 751 ; $ct ++){
-        //   echo "<div class = onePx > </div>";
-        //   // echo" <div class = left >
-        //   //             <span class = arial><span class = dishName >DishName </span><span class = ingredients >Ingredient1 / Ingredient2 / Ingredient3 / Ingredient4 </span><span class = price > \$45</span>
-        //   //             <span class = restrictions >GF V</span></span> </div>";
-        //   // echo "div "
-        // }
-        for($ct =0; $ct < 44 ; $ct ++){
-          // echo "<div class=center>";
-          // echo "<span class = course> Antipasti</span><br>";
-          // echo "</div>";
-          // echo" <div class = left >
-          //             <span class = arial><span class = dishName >DishName </span><span class = ingredients >Ingredient1 / Ingredient2 / Ingredient3 / Ingredient4 </span><span class = price > \$45</span>
-          //             <span class = restrictions >GF V</span></span> </div>";
-        }
-
-
-
 
 //PRINT MAIN MENU-----------------------------------------------------------
   // print_r($DishArray);
@@ -131,15 +109,12 @@ $NumDishes = 0;
 
   // echo "<div class = main >";
 
-  // echo "<div class=center>";
     for($ct=0;$ct<count($CourseArray);$ct++) //goes through entire courseArray
     {
       $Course = $CourseArray[$ct]['CourseName'];
       $CourseExtendedName = $CourseArray[$ct]['ExtendedName'];
-      // echo "<div class=>";
       echo "<br><div class = 'center course'> $CourseExtendedName</div>";
       echo "<div class = fivePx> </div>";
-      // echo "</div>";
 
       for($ct2 = 0; $ct2 < count($DishArray[$Course]);$ct2++){
 
@@ -187,12 +162,6 @@ $NumDishes = 0;
         }
       }
       // echo "</div>"; //main
-
-
-      // for($ct =0; $ct < $curPixels ; $ct ++){
-      //   echo "<div class=onePx > </div>";
-       
-      // }
       
       //PRINT BOTTOM TEXT----------------------------------
       echo "<div class = bottom>";
@@ -220,8 +189,6 @@ $NumDishes = 0;
       }
       $backText =  implode("</span>",$res_str);
       $backText = str_replace("*", "<span class=bold >", $backText); 
-
-      
 
 
       echo "<span class='backText arial left'>".$backText." </span>";

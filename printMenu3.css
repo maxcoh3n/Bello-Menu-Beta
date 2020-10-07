@@ -5,14 +5,12 @@
 .left{
     text-align: left;
     padding-left: 55px;
-    /* display: block; */
 }
 
 .centerImg {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    /* width: 50%; */
   }
 
 
@@ -86,16 +84,7 @@
 .grid{
     display: grid;
     height: 951px; 
-    /* grid-template-rows: 15% 78% 7%; */
-        /* grid-template-rows: 15% 70% 15%; */
-
 }
-
-/* .main{ */
-    /* align-content: stretch; */
-    /* display: table-column; */
-    /* height: 100%; */
-/* } */
 
 .top{
     height: 143px; /* 143  */
