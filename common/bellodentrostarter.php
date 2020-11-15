@@ -6,6 +6,8 @@
 		<select id="Menus">
 			<option value="" disabled selected hidden>Menus</option> <!-- MAKE THIS A PLACEHOLDER NOT A LINK-->
       <option value="printMenu.php">Print Menu </option>
+	  <option value="printMenu2.php?MenuName=Lunch">Lunch </option>
+	  <option value="printMenu2.php?MenuName=Dinner">Dinner </option>
       <option value="deleteMenu.php">Delete Menu </option>
 		</select>
 	</form>
