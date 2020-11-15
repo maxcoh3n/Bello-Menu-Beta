@@ -23,10 +23,24 @@
 
   <?php
 
-  $result = $_POST["MenuID|MenuName"];
-  $result_explode = explode('|', $result);
-  $MenuID = $result_explode[0];
-  $MenuName = $result_explode[1];
+  if(isset($_POST["MenuID|MenuName"])){
+    $result = $_POST["MenuID|MenuName"];
+    $result_explode = explode('|', $result);
+    $MenuID = $result_explode[0];
+    $MenuName = $result_explode[1];
+  }
+  else if(isset($_GET["MenuID|MenuName"])){
+    $result = $_GET["MenuID|MenuName"];
+    $result_explode = explode('|', $result);
+    $MenuID = $result_explode[0];
+    $MenuName = $result_explode[1];
+  }
+  else{
+    echo "Sorry, you aren't supposed to be here. Please go to <a href = 'printMenu.php' > this link </a> first";
+    die();
+  }
+
+  
   $MenuActive = "Menu" . $MenuID . "Active";
 
   
