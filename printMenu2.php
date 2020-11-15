@@ -15,7 +15,7 @@
   <h2> Menu Printer Page 2 </h2>
 
 
-  To add a new Dish, click <a href="addDish.php" target='_blank'>here</a>
+
  
   </form>
 
@@ -23,23 +23,38 @@
 
   <?php
 
-  if(isset($_POST["MenuID|MenuName"])){
+  if(isset($_POST["MenuID|MenuName"])){ 
     $result = $_POST["MenuID|MenuName"];
     $result_explode = explode('|', $result);
     $MenuID = $result_explode[0];
     $MenuName = $result_explode[1];
   }
-  else if(isset($_GET["MenuID|MenuName"])){
-    $result = $_GET["MenuID|MenuName"];
-    $result_explode = explode('|', $result);
-    $MenuID = $result_explode[0];
-    $MenuName = $result_explode[1];
+  else if(isset($_GET["MenuName"])){
+
+    $MenuName = $_GET["MenuName"];
+
+    $query0= "SELECT `MenuID` FROM `Menus` WHERE `MenuName` = '$MenuName' " ;
+    //print $query0;
+    $result= mysqli_query($cxn,$query0);
+    if ($cxn->connect_error) 
+      die("Connection failed: " . $cxn->connect_error);
+
+    $res = mysqli_fetch_assoc($result);
+
+    if(!$res){
+      echo "Sorry, that menu doesn't exist yet. Please go to <a href = 'printMenu.php' > this link </a> to create it";
+      die();  
+    }
+
+    $MenuID = $res['MenuID'];
+
   }
   else{
     echo "Sorry, you aren't supposed to be here. Please go to <a href = 'printMenu.php' > this link </a> first";
     die();
   }
 
+  echo "To add a new Dish, click <a href='addDish.php' target='_blank'>here</a>";
   
   $MenuActive = "Menu" . $MenuID . "Active";
 
@@ -54,7 +69,7 @@
   $result= mysqli_query($cxn,$query);
   if ($cxn->connect_error) {
     die("Connection failed: " . $cxn->connect_error);
-}
+    }
 
   while($row = mysqli_fetch_assoc($result))
   {
