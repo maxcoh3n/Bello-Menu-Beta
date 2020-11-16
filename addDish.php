@@ -6,16 +6,21 @@
 
 
 <?php  
-
-include 'common/bellodentrostarter.php'; ?>
+include 'common/bellodentrostarter.php'; 
+include 'common/courses.php'
+?>
 
 <h3> Add a Dish Page 1 </h3>
 
 <form method="post" action="addDish2.php">
 
 
+
+
 <p>Don't worry about capitalization, it is all handled for you</p>
 <?php
+
+$CourseArray = getCourses("");
 
 	echo        
 		"<table cellspacing='10'>
@@ -28,12 +33,17 @@ include 'common/bellodentrostarter.php'; ?>
 	"<tr>
 	<td>Course</td>
 	<td>  
-        <select name = 'CourseCategory' required='required'>        
-                <option value='Antipasti'>Antipasti</option>
-                <option value='Pasta'>Pasta</option>
-                <option value='Secondi'>Secondi</option>
-                <option value='Contorni'>Contorni</option>
-        </select>
+        <select name = 'CourseCategory' required='required'>";        
+		foreach($CourseArray as $Course){
+			echo "<option value=".$Course['CourseName']."> ".$Course['CourseName']."</option>";
+		}
+		
+	echo"
+		</select>
+		<tr>
+
+
+
     </td>
     </tr>
 
