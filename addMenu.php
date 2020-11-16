@@ -87,7 +87,7 @@ $query= "SELECT DISTINCT TopText, BottomText, BackText FROM Menus ORDER BY MenuI
 	if(count($CourseArray) >0){
 		echo "<tr>
 			<th> Course </th> 
-			<th> Course Order (1 to n, leave blank if not on this menu)</th>
+			<th> Course Order (1 to n, leave as 0 if not on this menu)</th>
 			</tr>
 		";
 	}
