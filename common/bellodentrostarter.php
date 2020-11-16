@@ -9,6 +9,7 @@
 	  <option value="printMenu2.php?MenuName=Lunch">Lunch </option>
 	  <option value="printMenu2.php?MenuName=Dinner">Dinner </option>
       <option value="deleteMenu.php">Delete Menu </option>
+	  <option value="addMenu.php">Add Menu </option>
 		</select>
 	</form>
 
@@ -26,7 +27,7 @@
 	<form name="form3">
 		<select id="Courses">
 			<option value="" disabled selected hidden>Courses</option> <!-- MAKE THIS A PLACEHOLDER NOT A LINK-->
-	        <option value="CreateSKU1.php">Enter New SKU</option>
+	        <!-- <option value="CreateSKU1.php">Enter New SKU</option> -->
 
 		</select>
 	</form>
