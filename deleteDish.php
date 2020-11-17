@@ -6,12 +6,15 @@
 </head>
 <body>
 
-<h2>Bello By Sandro Nardone Internal Website</h2>
-<h3>Italian Food the Way It's Served in Italy</h3>
+	<!-- <h2>Bello By Sandro Nardone Internal Website</h2>
+	<h3>Italian Food the Way It's Served in Italy</h3> -->
+
+
+<?php  include 'common/bellodentrostarter.php'; ?>
+
 <h3>Delete Dish</h3>
 
-<?php  include 'common/bellodentrostarter.php';
-
+<?php
 // STEP 1 Get SKU Data
 //--------------------------------------------------------------------------------------------------------------------------------------
 
