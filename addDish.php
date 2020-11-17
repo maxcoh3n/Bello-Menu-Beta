@@ -24,7 +24,7 @@ $CourseArray = getCourses("");
 
 	echo        
 		"<table cellspacing='10'>
-		<addadishtd colspan='30'></td></tr>
+		<td colspan='30'></td></tr>
 		<tr>
 		</tr>
 	";	
@@ -35,14 +35,13 @@ $CourseArray = getCourses("");
 	<td>  
         <select name = 'CourseCategory' required='required'>";        
 		foreach($CourseArray as $Course){
-			echo "<option value=".$Course['CourseName']."> ".$Course['CourseName']."</option>";
+			$CourseName = $Course['CourseName'];
+			echo "<option value=\"$CourseName\"> $CourseName</option>";
 		}
 		
 	echo"
 		</select>
 		<tr>
-
-
 
     </td>
     </tr>
