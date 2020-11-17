@@ -90,8 +90,8 @@ $NumDishes = 0;
     ));
   }
 
-  $curPixels -= ($NumCourses * 17);
-  $curPixels -= ($NumDishes * 18);
+  // $curPixels -= ($NumCourses * 17);
+  // $curPixels -= ($NumDishes * 18);
 
   echo "<div class =grid>";
   //PRINT TOP TEXT----------------------------------------------------------
@@ -113,8 +113,11 @@ $NumDishes = 0;
     {
       $Course = $CourseArray[$ct]['CourseName'];
       $CourseExtendedName = $CourseArray[$ct]['ExtendedName'];
-      echo "<br><div class = 'center course'> $CourseExtendedName</div>";
-      echo "<div class = fivePx> </div>";
+      if(count($DishArray[$Course]) >0){
+        echo "<br><div class = 'center course'> $CourseExtendedName</div>";
+        echo "<div class = fivePx> </div>";
+      }
+      
 
       for($ct2 = 0; $ct2 < count($DishArray[$Course]);$ct2++){
 
