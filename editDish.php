@@ -82,10 +82,11 @@ echo "
 <td width=100>Course Category</td>
 <td><select name='CourseCategory' >";
 foreach($CourseArray as $Course){
-    if($DishArray['CourseCategory'] == $Course['CourseName']){
-        echo "<option selected value=".$Course['CourseName']."> ".$Course['CourseName']."</option>";
+    $CourseName = $Course['CourseName'];
+    if($DishArray['CourseCategory'] == $CourseName){
+        echo "<option selected value=\"$CourseName\"> $CourseName</option>";
     }else{
-        echo "<option value=".$Course['CourseName']."> ".$Course['CourseName']."</option>";
+        echo "<option value=\"$CourseName\">$CourseName</option>";
     }
 }
 
