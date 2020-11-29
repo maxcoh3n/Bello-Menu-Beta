@@ -13,12 +13,8 @@
   ?>
 
   <h2> Menu Printer Page 2 </h2>
-
-
-
  
   </form>
-
 
 
   <?php
@@ -110,9 +106,10 @@
   // print_r($DishArray);
   // echo "</pre>";
 
-  ?> <form method="post" action="printMenu3.php" target="_blank"> <?php
+  ?> <form method="post" action="printMenu3.php" > <?php
 
   echo "<input type='hidden' name='MenuID'  value=$MenuID>";
+  echo "<input type='hidden' name='MenuName'  value=$MenuName>";
 
   $ArrayCount = 0;
   $CourseArray = getCourses($MenuID);
@@ -190,7 +187,10 @@
 
   <tr>
   <td>
-  <input type="submit" value="Print Menu">
+  <input type="submit" name="save" value="Save Menu">
+  </td>
+  <td>
+  <input type="submit" name="print" value="Print Menu">
   </td>
   </tr>
   </table>

@@ -2,6 +2,7 @@
 
   <html>
   <head>
+  <!-- <meta http-equiv='refresh' content="10; URL=printMenu2.php?MenuName=Dinner" /> -->
   <title>Print The Menu</title>
   </head>
   <body>
@@ -14,6 +15,8 @@
   echo "</style>";
   include 'common/restrictionBuilder.php';
   include 'common/courses.php';
+
+
 
 $MenuID = $_POST['MenuID'];
 $DishIDArray = $_POST['DishID'];
@@ -33,6 +36,15 @@ $MenuActive = "Menu" . $MenuID . "Active";
     }
   
 }
+
+//if they just wanted to save, send em back to the previous page
+if (isset($_POST['save'])) {
+  $MenuName = $_POST['MenuName'];
+  echo "<meta http-equiv='refresh' content='0; URL=printMenu2.php?MenuName=$MenuName' />";
+  die();
+}
+
+//Otherwise, print the menu
 
 // $TOTAL_PIXELS = 955; //total on screen
 
@@ -59,6 +71,8 @@ foreach(getCourses($MenuID) as $row){
   $DishArray[$row['CourseName']] = array();
 }
 
+// print_r($DishArray);
+
 $NumCourses = count($DishArray);
 $NumDishes = 0;
 
@@ -71,6 +85,7 @@ $NumDishes = 0;
 
   while($row = mysqli_fetch_assoc($result))
   {
+    // echo "coursecat is ". $row['CourseCategory'] . "<br>"; 
     $NumDishes++;
     array_push($DishArray[$row['CourseCategory']], array(
       'DishID'        =>$row['DishID'],
